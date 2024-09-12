@@ -1,0 +1,40 @@
+<main class="container">
+  <form [formGroup]="form" class="card">
+    <img src="../../../assets/images/auth-logo.svg" alt="">
+    <mat-divider></mat-divider>
+    <h2>{{title}}</h2>
+
+    <mat-form-field class="first-field">
+      <mat-label>{{emailInput.label}}</mat-label>
+      <input [type]="emailInput.type" [placeholder]="emailInput.placeholder" [formControl]="emailInput.formControl"
+        matInput>
+      <mat-icon matSuffix>{{emailInput.icon}}</mat-icon>
+
+      <mat-error *ngIf="emailInput.formControl.invalid">
+        {{emailInput.messageError()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{passwordInput.label}}</mat-label>
+      <input [type]="passwordInput.type()" [placeholder]="passwordInput.placeholder"
+        [formControl]="passwordInput.formControl" matInput>
+      <button mat-icon-button matSuffix (click)="passwordInput.toggle()">
+        <mat-icon>{{passwordInput.icon()}}</mat-icon>
+      </button>
+      <mat-error *ngIf="passwordInput.formControl.invalid">
+        {{passwordInput.messageError()}}
+      </mat-error>
+    </mat-form-field>
+
+    <div class="btns">
+      <a mat-button [routerLink]="[resetBtn.link]" color="primary">{{resetBtn.title}}</a>
+      <button (click)="signin()" [disabled]="form.invalid" mat-flat-button color="primary">{{authBtn}}</button>
+    </div>
+  </form>
+
+  <div class="call-me">
+    <span class="title">{{titleSupport}}</span>
+    <a class="email">{{emailSupport}}</a>
+  </div>
+</main>

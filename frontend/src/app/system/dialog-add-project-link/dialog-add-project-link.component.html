@@ -1,0 +1,29 @@
+<div class="title">
+  <h2 mat-dialog-title>Добавление учатника в проект</h2>
+</div>
+<form [formGroup]="form" mat-dialog-content>
+  <mat-form-field>
+    <mat-label>{{roleInput.label}}</mat-label>
+    <input [type]="roleInput.type" [placeholder]="roleInput.placeholder" [formControl]="roleInput.formControl" matInput>
+    <mat-icon matSuffix>{{roleInput.icon}}</mat-icon>
+    <mat-error *ngIf="roleInput.formControl.invalid">
+      {{roleInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{studentInput.label}}</mat-label>
+    <mat-select [placeholder]="studentInput.placeholder" [formControl]="studentInput.formControl">
+      <mat-option *ngFor="let student of students" [value]="student.user_id">
+        <img alt="" class="example-option-img" [src]="compileUrl(student.user.img)" height="25">
+        {{getFullname(student)}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="studentInput.formControl.invalid">
+      {{studentInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+</form>
+<mat-dialog-actions>
+  <button (click)="save()" [disabled]="form.invalid" mat-flat-button color="primary">Добавить</button>
+</mat-dialog-actions>

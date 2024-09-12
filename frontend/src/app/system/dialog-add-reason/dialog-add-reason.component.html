@@ -1,0 +1,41 @@
+<div class="title">
+  <h2 mat-dialog-title>Добавление объявления</h2>
+</div>
+<form mat-dialog-content [formGroup]="form">
+  <mat-form-field *ngFor="let inp of inps">
+    <mat-label>{{inp.label}}</mat-label>
+    <input [type]="inp.type" [placeholder]="inp.placeholder" [formControl]="inp.formControl" matInput>
+    <mat-error *ngIf="inp.formControl.invalid">
+      {{inp.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{descriptionInput.label}}</mat-label>
+    <textarea [formControl]="descriptionInput.formControl" [placeholder]="descriptionInput.placeholder"
+      matInput></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{dateInput.label}}</mat-label>
+    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+      <input matStartDate formControlName="start" [placeholder]="dateInput.placeholderStart">
+      <input matEndDate formControlName="end" [placeholder]="dateInput.placeholderEnd">
+    </mat-date-range-input>
+    <mat-hint>{{dateInput.mask}}</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+    <mat-error *ngIf="startControl.invalid ||endControl.invalid">{{dateInput.messageError()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field *ngFor="let inp of times">
+    <mat-label>{{inp.label}}</mat-label>
+    <input matInput type="time" [placeholder]="inp.placeholder" [formControl]="inp.formControl">
+    <mat-error *ngIf="inp.formControl.invalid">
+      {{inp.messageError()}}
+    </mat-error>
+  </mat-form-field>
+</form>
+<mat-dialog-actions>
+  <button (click)="save()" [disabled]="form.invalid || range.invalid" mat-flat-button color="primary">Сохранить</button>
+</mat-dialog-actions>

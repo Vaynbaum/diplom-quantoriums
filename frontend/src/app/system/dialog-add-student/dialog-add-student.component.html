@@ -1,0 +1,40 @@
+<div class="title">
+  <h2 mat-dialog-title>Добавление студента</h2>
+</div>
+<form mat-dialog-content [formGroup]="form">
+  <mat-form-field *ngFor="let field of fields">
+    <mat-label>{{field.label}}</mat-label>
+    <input [type]="field.type" [placeholder]="field.placeholder" [formControl]="field.formControl" matInput>
+    <mat-icon matSuffix>{{field.icon}}</mat-icon>
+    <mat-error *ngIf="field.formControl.invalid">
+      {{field.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{birthdayInput.label}}</mat-label>
+    <input #dateInput [placeholder]="birthdayInput.placeholder" [formControl]="birthdayInput.formControl" matInput
+      [matDatepicker]="picker">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="birthdayInput.formControl.invalid">
+      {{birthdayInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{groupInput.label}}</mat-label>
+    <mat-select [placeholder]="groupInput.placeholder" [formControl]="groupInput.formControl">
+      <mat-option *ngFor="let group of data.groups" [value]="group.id">
+        <img alt="" class="example-option-img" [src]="compileUrl(group.img)" height="25">
+        {{group.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="groupInput.formControl.invalid">
+      {{groupInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+</form>
+<mat-dialog-actions>
+  <button (click)="save()" [disabled]="form.invalid" mat-flat-button color="primary">Добавить</button>
+</mat-dialog-actions>

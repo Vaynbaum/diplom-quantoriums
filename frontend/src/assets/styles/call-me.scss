@@ -1,0 +1,23 @@
+@import "../../styles.scss";
+
+.call-me {
+  margin-top: auto;
+  margin-bottom: 0;
+  justify-content: center;
+
+  display: flex;
+  font-weight: 400;
+  flex-wrap: wrap;
+  gap: $smallGap;
+  .email {
+    color: $colorBlue;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: 300ms;
+  }
+
+  .email:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,102 @@
+@import "../../../assets/styles/card.scss";
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 $paddingValue;
+  gap: $paddingValue;
+  justify-content: center;
+
+  .main-title {
+    display: flex;
+    column-gap: $paddingValue;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    .left {
+      width: 100%;
+    }
+    .right {
+      width: 100%;
+      max-width: 600px;
+      h1 {
+        font-weight: 400;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .left {
+    width: 100%;
+    .card {
+      gap: 0;
+    }
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: $paddingValue;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+
+    .card {
+      width: 100%;
+
+      .date {
+        display: flex;
+        align-items: center;
+        color: $colorGray;
+        gap: $smallGap;
+        font-size: 12px;
+      }
+
+      h3 {
+        font-weight: 400;
+        font-size: 18px;
+      }
+
+      img {
+        width: 100%;
+        border-radius: $borderRadius;
+      }
+      .description {
+        p {
+          width: 100%;
+          text-align: justify;
+        }
+      }
+    }
+  }
+}
+.card {
+  box-shadow: 0px 4px 40.6px 0px #2b57c75c;
+  flex-direction: column;
+}
+@media (min-width: 0px) {
+  .left {
+    max-width: 600px;
+  }
+}
+@media (min-width: $minWidthNotebook) {
+  .left {
+    max-width: 300px;
+  }
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.inline-calendar-card {
+  margin-bottom: 20px;
+}
+.example-form-field {
+  width: 100%;
+}
+
+mat-expansion-panel {
+  button {
+    padding: 0 16px !important;
+  }
+}

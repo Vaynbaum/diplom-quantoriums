@@ -1,0 +1,9 @@
+@import "../../styles.scss";
+
+.card {
+  display: flex;
+  border-radius: $borderRadius;
+  gap: $middleGap;
+  padding: $paddingValue;
+  background: $colorWhite;
+}

@@ -1,0 +1,115 @@
+@import "../../../assets/styles/card.scss";
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 $paddingValue;
+  gap: $paddingValue;
+  justify-content: center;
+
+  .main-title {
+    width: 100%;
+    h1 {
+      font-weight: 400;
+      font-size: 20px;
+    }
+  }
+  .left {
+    width: 100%;
+    .card {
+      gap: 0;
+    }
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: $paddingValue;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+  }
+}
+@media (min-width: 0px) {
+  .left {
+    max-width: 600px;
+  }
+}
+@media (min-width: $minWidthNotebook) {
+  .left {
+    max-width: 300px;
+  }
+}
+.inline-calendar-card {
+  box-shadow: 0px 4px 40.6px 0px #2b57c75c;
+}
+
+.schedule-card {
+  display: flex;
+  box-shadow: 0px 4px 40.6px 0px #2b57c75c;
+
+  flex-direction: column;
+  padding: $middlePaddingValue;
+  gap: $middleGap;
+
+  h3 {
+    font-weight: 300;
+    font-size: 16px;
+  }
+  box-shadow: 0px 4px 40.6px 0px #2b57c75c;
+
+  .schedule-item {
+    display: flex;
+    gap: $smallGap;
+
+    .time {
+      display: flex;
+      flex-direction: column;
+      font-size: 12px;
+      color: $colorGray;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      min-width: 50px;
+
+      .quantum {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .room {
+        width: 100%;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .teacher {
+      min-width: 50px;
+      font-size: 12px;
+      margin-left: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+@media (min-width: 0px) {
+  .schedule-card {
+    width: 100%;
+  }
+}
+@media (min-width: 400px) {
+  .schedule-card {
+    width: 100%;
+  }
+}
+@media (min-width: $minWidthNotebook) {
+  .schedule-card {
+    max-width: 500px;
+  }
+}

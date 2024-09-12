@@ -1,0 +1,63 @@
+<div class="main">
+  <div class="main-title">
+    <div class="left">
+    </div>
+    <div class="right">
+      <h1>{{title}}</h1>
+    </div>
+  </div>
+  <mat-accordion class="left">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Фильтры
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-form-field class="example-form-field">
+        <mat-label>Поиск по новости</mat-label>
+        <input placeholder="Введите название новости" (keyup)="onKeyup()" matInput type="text" [(ngModel)]="value">
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="clearValue()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-card class="inline-calendar-card">
+        <mat-calendar (selectedChange)="onDateChange($event)" [(selected)]="day"></mat-calendar>
+      </mat-card>
+      <button (click)="reset()" mat-flat-button color="primary">Сбросить</button>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="right">
+    <div *ngIf="news.length==0">
+      Новостей пока нет...
+    </div>
+    <div *ngFor="let item of news" class="card">
+      <div class="row">
+        <div class="date">
+          <mat-icon>schedule</mat-icon>
+          <span>{{item.created_at | date:"dd.MM.YYYY HH:mm"}}</span>
+        </div>
+        <button *ngIf="isCanEdit()" mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button (click)="editNews(item)" mat-menu-item>
+            <mat-icon>edit</mat-icon>Изменить
+          </button>
+          <button (click)="deleteNews(item)" mat-menu-item>
+            <mat-icon>remove</mat-icon>Удалить
+          </button>
+        </mat-menu>
+      </div>
+      <h3>{{item.title}}</h3>
+      <img *ngIf="item.img" [src]="compileUrl(item)">
+      <div class="description" *ngIf="item.description">
+        <ng-container *ngFor="let line of item.description.split('\n')">
+          <p>{{ line }}</p>
+          <br *ngIf="line==''">
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

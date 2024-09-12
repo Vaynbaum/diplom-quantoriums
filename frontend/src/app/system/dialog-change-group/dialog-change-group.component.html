@@ -1,0 +1,20 @@
+<div class="title">
+  <h2 mat-dialog-title>Изменение группы</h2>
+</div>
+<form mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <mat-label>{{groupInput.label}}</mat-label>
+    <mat-select [placeholder]="groupInput.placeholder" [formControl]="groupInput.formControl">
+      <mat-option *ngFor="let group of data.groups" [value]="group.id">
+        <img alt="" class="example-option-img" [src]="compileUrl(group.img)" height="25">
+        {{group.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="groupInput.formControl.invalid">
+      {{groupInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+</form>
+<mat-dialog-actions>
+  <button (click)="save()" [disabled]="form.invalid" mat-flat-button color="primary">Добавить</button>
+</mat-dialog-actions>

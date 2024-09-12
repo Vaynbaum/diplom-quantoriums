@@ -1,0 +1,23 @@
+@import "../../../styles.scss";
+
+.title {
+  padding: 0 $paddingValue $paddingValue;
+}
+form {
+  padding: 0 $paddingValue $paddingValue $paddingValue !important;
+  display: flex;
+  flex-direction: column;
+  gap: $middleGap;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+}
+mat-dialog-actions {
+  padding: 0 $paddingValue $paddingValue;
+
+  button {
+    padding: 0 $paddingValue;
+  }
+}

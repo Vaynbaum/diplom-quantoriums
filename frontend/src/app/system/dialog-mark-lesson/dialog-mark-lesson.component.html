@@ -1,0 +1,13 @@
+<div class="title">
+  <h1 mat-dialog-title>Завершение урока</h1>
+</div>
+<div class="main" mat-dialog-content>
+  <div class="row" *ngFor="let student of students">
+    <img [src]="compileUrl(student.user.img)">
+    <div>{{getFullname(student)}}</div>
+    <mat-slide-toggle [(ngModel)]="student.is_here">Здесь</mat-slide-toggle>
+  </div>
+</div>
+<mat-dialog-actions>
+  <button (click)="save()" mat-flat-button color="primary">Завершить</button>
+</mat-dialog-actions>

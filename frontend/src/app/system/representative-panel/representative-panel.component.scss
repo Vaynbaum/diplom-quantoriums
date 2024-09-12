@@ -1,0 +1,129 @@
+@import "../../../assets/styles/card.scss";
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $paddingValue;
+  padding: 0 $paddingValue;
+  .left,
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: $middleGap;
+  }
+  .title {
+    font-weight: 400;
+    font-size: 18px;
+  }
+  .left {
+    width: 100%;
+    gap: $bigGap;
+    height: max-content;
+    .btns {
+      display: flex;
+      display: flex;
+      gap: $middleGap;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .ava {
+      max-width: 250px;
+      align-self: center;
+      cursor: pointer;
+      width: 100%;
+      border-radius: $borderRadius;
+    }
+    .user-block {
+      max-width: 400px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: $middleGap;
+
+      .name {
+        font-size: 18px;
+        font-weight: 300;
+      }
+    }
+  }
+  .right {
+    width: 100%;
+    max-width: 600px;
+    .card {
+      .field {
+        .field-name {
+          width: 45%;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 0px) {
+  .left {
+    max-width: 600px;
+  }
+}
+@media (min-width: $minWidthNotebook) {
+  .left {
+    max-width: 350px;
+  }
+}
+.card {
+  flex-direction: column;
+  box-shadow: 0px 4px 40.6px 0px #2b57c75c;
+}
+@media (min-width: 0px) {
+  .card {
+    .btns {
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}
+@media (min-width: $minWidthTablet) {
+  .card {
+    .btns {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
+mat-list {
+  padding: 0;
+
+  mat-list-item {
+    button {
+      margin-top: 0 !important;
+      margin-right: 0;
+    }
+  }
+}
+.teacher {
+  min-height: 140px !important;
+}
+.content {
+  padding-top: $paddingValue;
+  display: flex;
+  flex-direction: column;
+  min-height: 62px;
+
+  button {
+    align-self: flex-end;
+  }
+}
+button {
+  padding: 0 16px;
+}
+.cursor {
+  cursor: pointer;
+}
+.example-form-field {
+  padding-top: 20px;
+}
+.big-item {
+  button {
+    margin-bottom: 12px !important;
+  }
+}

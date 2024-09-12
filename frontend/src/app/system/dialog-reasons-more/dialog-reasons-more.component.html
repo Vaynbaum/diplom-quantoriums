@@ -1,0 +1,19 @@
+<div class="title">
+  <h1 mat-dialog-title>Отмена занятий</h1>
+</div>
+<div class="main" mat-dialog-content>
+  <mat-list *ngIf="reasons.length>0">
+    <mat-list-item class="cursor" *ngFor="let reason of reasons">
+      <span matListItemTitle>{{reason.name}}</span>
+      <span matListItemLine>{{reason.date_begin|date:"dd.MM.yyyy HH:mm"}} -
+        {{reason.date_end|date:"dd.MM.yyyy HH:mm"}}
+      </span>
+      <button (click)="deleteReason(reason)" mat-icon-button matListItemMeta>
+        <mat-icon style="transform:translate(0, -4px)">remove</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</div>
+<mat-dialog-actions>
+  <button (click)="addReason()" mat-flat-button color="primary">Добавить объявление</button>
+</mat-dialog-actions>

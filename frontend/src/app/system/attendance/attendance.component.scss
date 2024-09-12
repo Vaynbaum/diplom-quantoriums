@@ -1,0 +1,55 @@
+@import "../../../assets/styles/card.scss";
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 $paddingValue;
+  gap: $paddingValue;
+  justify-content: center;
+  .card {
+    box-shadow: 0px 4px 40.6px 0px #2b57c75c;
+    flex-direction: column;
+  }
+  .main-title {
+    width: 100%;
+    h1 {
+      font-weight: 400;
+      font-size: 20px;
+    }
+  }
+  .left {
+    width: 100%;
+    .card {
+      gap: 0;
+    }
+  }
+  .right {
+    width: 100%;
+    max-width: 600px;
+    overflow-x: scroll;
+    height: max-content;
+
+    table {
+      width: 100%;
+    }
+  }
+}
+@media (min-width: 0px) {
+  .left {
+    max-width: 600px;
+  }
+}
+@media (min-width: $minWidthNotebook) {
+  .left {
+    max-width: 300px;
+  }
+}
+
+.example-option-img {
+  vertical-align: bottom;
+  border-radius: 5px;
+  margin-right: $middleGap;
+}
+.mat-column-demo-name {
+  min-width: 150px;
+  border-right: 1px solid $colorGray;
+}

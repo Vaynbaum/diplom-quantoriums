@@ -1,0 +1,40 @@
+<div class="title">
+  <h2 mat-dialog-title>Добавление учителя</h2>
+</div>
+<form mat-dialog-content [formGroup]="form">
+  <mat-form-field *ngFor="let field of fields">
+    <mat-label>{{field.label}}</mat-label>
+    <input [type]="field.type" [placeholder]="field.placeholder" [formControl]="field.formControl" matInput>
+    <mat-icon matSuffix>{{field.icon}}</mat-icon>
+    <mat-error *ngIf="field.formControl.invalid">
+      {{field.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{birthdayInput.label}}</mat-label>
+    <input #dateInput [placeholder]="birthdayInput.placeholder" [formControl]="birthdayInput.formControl" matInput
+      [matDatepicker]="picker">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="birthdayInput.formControl.invalid">
+      {{birthdayInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{quantumInput.label}}</mat-label>
+    <mat-select [placeholder]="quantumInput.placeholder" [formControl]="quantumInput.formControl">
+      <mat-option *ngFor="let quantum of data.quantums" [value]="quantum.id">
+        <img alt="" class="example-option-img" [src]="compileUrl(quantum.img)" height="25">
+        {{quantum.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="quantumInput.formControl.invalid">
+      {{quantumInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+</form>
+<mat-dialog-actions>
+  <button (click)="save()" [disabled]="form.invalid" mat-flat-button color="primary">Добавить</button>
+</mat-dialog-actions>

@@ -1,0 +1,16 @@
+@import "../../styles.scss";
+@import "../../assets/styles/call-me.scss";
+.container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  gap: 30px;
+  background: url("../../assets/images/auth-background.png");
+  background-size: contain;
+  main {
+    margin-top: $heightHeader;
+    // position: relative;
+    width: 100%;
+  }
+}
+

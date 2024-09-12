@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="header">
+    <h1>Расписание</h1>
+    <button *ngIf="isEdit()" (click)="addScheduleItem()" color="primary" mat-flat-button>Добавить</button>
+  </div>
+
+  <div class="card accordion">
+
+    <mat-form-field *ngIf="groups.length>0">
+      <mat-label>Группа</mat-label>
+      <mat-select placeholder="Укажите группу"  [formControl]="groupControl">
+        <mat-option (click)="onSelected()" *ngFor="let group of groups" [value]="group.id">
+          <img class="option-img" [src]="compileUrl(group.img)" height="25">
+          {{group.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Квантум</mat-label>
+      <mat-select placeholder="Укажите квантум" [formControl]="quantumControl">
+        <mat-option (click)="onSelected()" *ngFor="let quantum of quantums" [value]="quantum.id">
+          <img class="option-img" [src]="compileUrl(quantum.img)" height="25">
+          {{quantum.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Учитель</mat-label>
+      <mat-select placeholder="Выберите учителя" [formControl]="teacherControl">
+        <mat-option (click)="onSelected()" *ngFor="let teacher of teachers" [value]="teacher.id">
+          <img class="option-img" [src]="compileUrl(teacher.img)" height="25">
+          {{getFullnameTeacherInvert(teacher)}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button (click)="reset()" mat-flat-button color="primary">Сбросить</button>
+  </div>
+
+  <div class="schedule">
+    <div class="schedule-card card" *ngFor="let schedule of schedules">
+      <h3>{{schedule.title}}</h3>
+      <mat-divider></mat-divider>
+      <div [ngStyle]="getStyleItem()" (click)="editScheduleItem(item)" class="schedule-item"
+        *ngFor="let item of schedule.schedules">
+        <div class="time">
+          <span> {{item.time_begin_pr|date:"HH:mm"}}</span>
+          <span>{{item.time_end_pr|date:"HH:mm"}}</span>
+        </div>
+        <mat-divider vertical="true"></mat-divider>
+        <div class="main">
+          <span [matTooltip]="item.quantum.name" class="quantum">{{item.quantum.name}}</span>
+          <span class="room">
+            <span>{{item.group.name}}</span>,
+            <span [matTooltip]="item.room.name">{{item.room.name}}</span>
+          </span>
+        </div>
+        <div [matTooltip]="getFullnameTeacher(item.teacher)" class="teacher">
+          {{getFullnameTeacher(item.teacher)}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

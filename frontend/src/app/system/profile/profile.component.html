@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="left card">
+    <img [matTooltip]="getTooltip()" (click)="onOpenFileDialog('file-input-cover')"
+      [ngStyle]="imgStyle()" class="ava" [src]="compileUrl(profile.img)">
+    <input [ngStyle]="{'display':'none'}" (change)="fileChange($event)" id="file-input-cover" [accept]="acceptImages"
+      type="file" />
+    <div class="user-block">
+      <div class="name">{{getFullname()}}</div>
+    </div>
+
+    <div class="contact-block">
+      <h3 class="title">{{contactTitle}}</h3>
+      <div class="field">
+        <div class="field-name">{{emailTitle}}</div>
+        <span class="field-value">{{profile.email}}</span>
+      </div>
+      <div *ngIf="getPhone()" class="field">
+        <div class="field-name">{{phoneTitle}}</div>
+        <span class="field-value">{{getPhone()}}</span>
+      </div>
+    </div>
+    <button (click)="editUser()" *ngIf="canEdit()" mat-button color="primary">
+      <mat-icon>edit</mat-icon>Изменить
+    </button>
+  </div>
+
+  <div class="right">
+    <div class="card">
+      <h3 class="title">{{title}}</h3>
+      <div class="field">
+        <div class="field-name">{{createdAtTitle}}</div>
+        <span class="field-value">{{profile.created_at| date:"d MMM YYYY г."}}</span>
+      </div>
+      <div class="field">
+        <div class="field-name">{{roleTitle}}</div>
+        <span class="field-value">{{profile.role?.name}}</span>
+      </div>
+      <div *ngIf="getBirthdate()" class="field">
+        <div class="field-name">{{birthdayTitle}}</div>
+        <span class="field-value">{{getBirthdate() | date:"d MMMM YYYY г."}}</span>
+      </div>
+      <div *ngIf="getQuantorium()" class="field">
+        <div class="field-name">{{getQuantoriumTitle()}}</div>
+        <span class="field-value">{{getQuantorium()}}</span>
+      </div>
+      <div *ngIf="getGroup()" class="field">
+        <div class="field-name">{{groupTitle}}</div>
+        <span class="field-value">{{getGroup()}}</span>
+      </div>
+      <div *ngIf="getQuantum()" class="field">
+        <div class="field-name">{{quantumTitle}}</div>
+        <span class="field-value">{{getQuantum()}}</span>
+      </div>
+      <mat-divider *ngIf="isStudent"></mat-divider>
+      <h3 *ngIf="isStudent" class="title">{{quantumsTitle}}</h3>
+      <mat-list *ngIf="isStudent">
+        <mat-list-item class="cursor" *ngFor="let link of profile.student?.quantum_links">
+          <span matListItemTitle>{{link.quantum.name}}</span>
+          <span [ngStyle]="getStyleQuantum(link)" matListItemLine>{{getStatusQuantum(link)}}</span>
+          <img style="margin-left:0" matListItemAvatar [src]="compileUrl(link.quantum.img)">
+          <button *ngIf="canDeleteQuantum()" (click)="deleteLink(link)" style="margin-right:0" mat-icon-button
+            matListItemMeta>
+            <mat-icon style="transform:translate(0, -8px)">remove</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</div>

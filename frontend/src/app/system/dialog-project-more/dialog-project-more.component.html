@@ -1,0 +1,44 @@
+<div class="title">
+  <h1 mat-dialog-title>Проект</h1>
+</div>
+<div class="main" mat-dialog-content>
+  <div class="field">
+    <div class="field-title">Название</div>
+    <span class="field-value">{{data.project.name}}</span>
+  </div>
+  <div class="field">
+    <div class="field-title">Квантум</div>
+    <span class="field-value">{{project?.quantum?.name}}</span>
+  </div>
+  <div class="field">
+    <div class="field-title">Добавлен</div>
+    <span class="field-value">{{data.project.created_at|date:"d MMM YYYY г."}}</span>
+  </div>
+  <p>
+    {{data.project.description}}
+  </p>
+  <div *ngIf="project?.project_links?.length!=0">
+    <h2>Участники</h2>
+    <mat-list>
+      <mat-list-item class="cursor" *ngFor="let link of project?.project_links">
+        <span (click)="goToUser(link.student)" matListItemTitle>{{getFullname(link.student)}}</span>
+        <span (click)="goToUser(link.student)" matListItemLine>{{link.role}}</span>
+        <img (click)="goToUser(link.student)" style="margin-left:0" matListItemAvatar
+          [src]="compileUrl(link.student.user.img)">
+        <button (click)="deleteLink(link)" *ngIf="canDelete()" mat-icon-button matListItemMeta>
+          <mat-icon style="transform:translate(0, -8px)">remove</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <h2>Прикрепленные файлы</h2>
+  <div class="files">
+    <div (click)="redirectLink(file)" class="card" *ngFor="let file of project?.materials.files">
+      <img class="icon" [src]="getImage(file)">
+      <div class="filename">
+        {{file.originalFilename}}
+      </div>
+    </div>
+  </div>
+</div>

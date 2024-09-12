@@ -1,0 +1,58 @@
+<div class="title">
+  <h2 mat-dialog-title>Добавление расписания</h2>
+</div>
+<form mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <mat-label>{{deteweekInput.label}}</mat-label>
+    <mat-select [placeholder]="deteweekInput.placeholder" [formControl]="deteweekInput.formControl">
+      <mat-option *ngFor="let value of deteweekInput.values" [value]="value.id">
+        <span class="option-value">{{value.name}}</span>
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="deteweekInput.formControl.invalid">
+      {{deteweekInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field *ngFor="let inp of inps">
+    <mat-label>{{inp.label}}</mat-label>
+    <mat-select [placeholder]="inp.placeholder" [formControl]="inp.formControl">
+      <mat-option *ngFor="let value of inp.values" [value]="value.id">
+        <img alt="" class="example-option-img" [src]="compileUrl(value.img)" height="25">
+        {{value.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="inp.formControl.invalid">
+      {{inp.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{teacherInput.label}}</mat-label>
+    <mat-select [placeholder]="teacherInput.placeholder" [formControl]="teacherInput.formControl">
+      <mat-option *ngFor="let value of teacherInput.values" [value]="value.id">
+        <img alt="" class="example-option-img" [src]="compileUrl(value.img)" height="25">
+        {{getFullname(value)}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="teacherInput.formControl.invalid">
+      {{teacherInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field *ngFor="let inp of times">
+    <mat-label>{{inp.label}}</mat-label>
+    <input matInput type="time" [placeholder]="inp.placeholder" [formControl]="inp.formControl">
+    <mat-error *ngIf="inp.formControl.invalid">
+      {{inp.messageError()}}
+    </mat-error>
+  </mat-form-field>
+</form>
+<mat-dialog-actions>
+  <div class="btns">
+    <button (click)="deleteItem()" *ngIf="data.isEdit" mat-button color="primary">Удалить</button>
+    <button (click)="save()" [disabled]="form.invalid" mat-flat-button color="primary">
+      Сохранить
+    </button>
+  </div>
+</mat-dialog-actions>

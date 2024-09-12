@@ -1,0 +1,15 @@
+@import "../../../styles.scss";
+
+.title {
+  padding: 0 $paddingValue $paddingValue;
+}
+.main {
+  padding: 0 $paddingValue $paddingValue $paddingValue !important;
+}
+mat-dialog-actions {
+  padding: 0 $paddingValue $paddingValue;
+
+  button {
+    padding: 0 $paddingValue;
+  }
+}

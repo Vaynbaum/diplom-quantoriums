@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="block">
+    <div class="title">
+      <h1>{{allMaterials}}</h1>
+    </div>
+    <div class="content">
+      <ng-container *ngIf="profile.student">
+        <div class="card" *ngFor="let material of materials">
+          <img (click)="redirectLink(material.file)" class="icon" [src]="getImage(material.file)">
+          <div (click)="redirectLink(material.file)" class="filename">
+            {{material.file.originalFilename}}
+          </div>
+          <div class="author row">
+            <img [matTooltip]="material.teacher.quantum.name" [src]="compileUrl(material.teacher.quantum.img)">
+            <a (click)="goToUser(material.teacher)">{{getFullnameTeacher(material.teacher)}}</a>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="profile.teacher">
+        <div class="card" *ngFor="let project of projects">
+          <img class="background" (click)="openProject(project)" [src]="compileUrl(project.img)">
+          <div class="filename" (click)="openProject(project)">
+            {{project.name}}
+          </div>
+          <a (click)="goToUser(project.student)" class="author">{{getFullnameTeacher(project.student)}}</a>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="title">
+      <h1>{{myMaterials}}</h1>
+    </div>
+    <div class="content">
+      <ng-container *ngIf="profile.teacher">
+        <div class="card" *ngFor="let material of profile.teacher.materials">
+          <button (click)="deleteMaterial(material.id)" class="delete" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+          <img (click)="redirectLink(material.file)" class="icon" [src]="getImage(material.file)">
+          <div (click)="redirectLink(material.file)" class="filename">
+            {{material.file.originalFilename}}
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="profile.student">
+        <div class="card" *ngFor="let link of profile.student.project_links">
+          <button class="delete" mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button *ngIf="isOwnerProject(link.project)" (click)="onOpenFileDialog(inputImgId)" mat-menu-item>
+              <mat-icon>add_photo_alternate</mat-icon>Изменить картинку
+            </button>
+            <button (click)="editProject(link.project)" mat-menu-item>
+              <mat-icon>edit</mat-icon>Изменить
+            </button>
+            <button *ngIf="isOwnerProject(link.project)" (click)="addProjectLink(link.project_id)" mat-menu-item>
+              <mat-icon>person_add</mat-icon>Добавить участника
+            </button>
+            <button *ngIf="isOwnerProject(link.project)" (click)="deleteMaterial(link.project_id)" mat-menu-item>
+              <mat-icon>delete</mat-icon>Удалить
+            </button>
+          </mat-menu>
+          <img class="background" (click)="openProject(link.project)" [src]="compileUrl(link.project.img)">
+          <div class="filename" (click)="openProject(link.project)">
+            {{link.project.name}}
+          </div>
+          <input [ngStyle]="{'display':'none'}" (change)="fileChangeImg($event,link.project_id)" [id]="inputImgId"
+            type="file" [accept]="acceptImages" />
+        </div>
+      </ng-container>
+
+      <div class="card">
+        <button class="add" (click)="addMaterialItem()" mat-button color="primary">
+          <img src="../../../assets/images/add.svg">
+        </button>
+        <span class="label">{{addMaterial}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<input [ngStyle]="{'display':'none'}" (change)="fileChange($event)" [id]="inputFileId" type="file" />

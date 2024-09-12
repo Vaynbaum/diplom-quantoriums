@@ -1,0 +1,31 @@
+@import "../../../styles.scss";
+
+.title {
+  padding: 0 $paddingValue $paddingValue;
+}
+.main {
+  padding: 0 $paddingValue $paddingValue $paddingValue !important;
+  display: flex;
+  flex-direction: column;
+  gap: $middleGap;
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: $smallGap;
+    img {
+      height: 40px;
+      border-radius: 50%;
+    }
+    mat-slide-toggle{
+      margin-left: auto;
+    }
+  }
+}
+mat-dialog-actions {
+  padding: 0 $paddingValue $paddingValue;
+
+  button {
+    padding: 0 $paddingValue;
+  }
+}

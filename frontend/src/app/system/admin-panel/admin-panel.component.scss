@@ -1,0 +1,62 @@
+@import "../../../assets/styles/card.scss";
+
+.container {
+  padding: 0 $paddingValue;
+  display: flex;
+  flex-direction: column;
+  gap: $paddingValue;
+
+  .btns {
+    display: flex;
+    gap: $middleGap;
+    width: 100%;
+    flex-wrap: wrap;
+    button {
+      padding: 0 16px;
+      align-self: flex-end;
+    }
+  }
+  @media (min-width: 0px) {
+    .btns {
+      button {
+        width: 100%;
+      }
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  @media (min-width: $minWidthTablet) {
+    .btns {
+      button {
+        width: max-content;
+      }
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
+
+mat-action-row {
+  button {
+    padding: 0 $paddingValue;
+  }
+}
+
+mat-list-item {
+  span,
+  img {
+    cursor: pointer;
+  }
+}
+
+mat-panel-title {
+  display: flex;
+  gap: $smallGap;
+  align-items: center;
+  justify-content: space-between;
+  img {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+  }
+}

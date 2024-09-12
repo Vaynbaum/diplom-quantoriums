@@ -1,0 +1,55 @@
+<div class="title">
+  <h2 mat-dialog-title>Проект</h2>
+</div>
+<form [formGroup]="form" mat-dialog-content>
+  <mat-form-field>
+    <mat-label>{{firstnameInput.label}}</mat-label>
+    <input [type]="firstnameInput.type" [placeholder]="firstnameInput.placeholder"
+      [formControl]="firstnameInput.formControl" matInput>
+    <mat-icon matSuffix>{{firstnameInput.icon}}</mat-icon>
+    <mat-error *ngIf="firstnameInput.formControl.invalid">
+      {{firstnameInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{descriptionInput.label}}</mat-label>
+    <textarea [formControl]="descriptionInput.formControl" [placeholder]="descriptionInput.placeholder" matInput>
+    </textarea>
+    <mat-error *ngIf="descriptionInput.formControl.invalid">
+      {{descriptionInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="data.quantums">
+    <mat-label>{{quantumInput.label}}</mat-label>
+    <mat-select [placeholder]="quantumInput.placeholder" [formControl]="quantumInput.formControl">
+      <mat-option *ngFor="let quantum of quantums" [value]="quantum.id">
+        <img alt="" class="example-option-img" [src]="compileUrl(quantum.img)" height="25">
+        {{quantum.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="quantumInput.formControl.invalid">
+      {{quantumInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <div class="files">
+    <div class="card" *ngFor="let file of attach_files">
+      <button (click)="deleteFile(file)" class="delete" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+      <img class="icon" [src]="getImage(file)">
+      <div class="filename">
+        {{file.originalFilename}}
+      </div>
+    </div>
+  </div>
+</form>
+<mat-dialog-actions>
+  <input [ngStyle]="{'display':'none'}" (change)="fileChange($event)" id="mat-file-input" type="file" />
+  <div class="btns">
+    <button (click)="onOpenFileDialog('mat-file-input')" mat-button color="primary">Прикрепить файл</button>
+    <button [disabled]="form.invalid || loadingFile" (click)="save()" mat-flat-button color="primary">Сохранить</button>
+  </div>
+</mat-dialog-actions>

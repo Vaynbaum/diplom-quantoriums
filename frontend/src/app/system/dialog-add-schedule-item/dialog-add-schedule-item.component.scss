@@ -1,0 +1,49 @@
+@import "../../../styles.scss";
+
+.title {
+  padding: 0 $paddingValue $paddingValue;
+}
+form {
+  padding: 0 $paddingValue $paddingValue $paddingValue !important;
+  display: flex;
+  flex-direction: column;
+  gap: $middleGap;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+mat-dialog-actions {
+  padding: 0 $paddingValue $paddingValue;
+
+  button {
+    padding: 0 $paddingValue;
+  }
+}
+.btns {
+  display: flex;
+  gap: $smallGap;
+  width: 100%;
+  flex-wrap: wrap;
+}
+@media (min-width: 0px) {
+  .btns {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+@media (min-width: $minWidthTablet) {
+  .btns {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+.option-value {
+  margin-left: $middleGap !important;
+}
+.example-option-img {
+  vertical-align: bottom;
+  border-radius: 5px;
+  margin-right: $middleGap;
+  margin-left: $middleGap !important;
+}

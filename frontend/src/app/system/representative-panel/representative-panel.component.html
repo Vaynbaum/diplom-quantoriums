@@ -1,0 +1,166 @@
+<div class="container">
+  <div class="left card">
+    <img matTooltip="Загружайте картинки в формате 1:1" (click)="onOpenFileDialog('file-input-cover')" class="ava"
+      [src]="compileUrl(profile.representative?.quantorium?.img)">
+    <input [ngStyle]="{'display':'none'}"
+      (change)="fileChange($event,'quantorium',profile.representative?.quantorium_id)" id="file-input-cover"
+      [accept]="acceptImages" type="file" />
+
+    <div class="user-block">
+      <div class="name">{{profile.representative?.quantorium?.address}}</div>
+    </div>
+    <button (click)="addNews()" mat-flat-button color="primary">Добавить новость</button>
+  </div>
+
+  <div class="right">
+    <div class="card">
+      <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selectedIndex($event)">
+        <mat-tab label="Квантумы">
+          <div class="content">
+            <button (click)="addQuantum()" mat-flat-button color="primary">Добавить квантум</button>
+            <mat-list *ngIf="quantums.length>0">
+              <mat-list-item *ngFor="let quantum of quantums; index as i;">
+                <span matListItemTitle>{{quantum.name}}</span>
+                <img style="margin-left:0" matListItemAvatar [src]="compileUrl(quantum.img)">
+                <button matTooltip="Загружайте картинки в формате 1:1"
+                  (click)="onOpenFileDialog(compileId('quantum',i))" mat-icon-button matListItemMeta>
+                  <mat-icon>add_photo_alternate</mat-icon>
+                </button>
+                <input [ngStyle]="{'display':'none'}" (change)="fileChange($event,'quantum',quantum.id)"
+                  [id]="compileId('quantum',i)" [accept]="acceptImages" type="file" />
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="Группы">
+          <div class="content">
+            <button (click)="addGroup()" mat-flat-button color="primary">Добавить группу</button>
+            <mat-list *ngIf="groups.length>0">
+              <mat-list-item class="big-item" *ngFor="let group of groups; index as i;">
+                <span matListItemTitle>{{group.name}}</span>
+                <span matListItemLine>Учащихся: {{group.students.length}}</span>
+                <img style="margin-left:0" matListItemAvatar [src]="compileUrl(group.img)">
+                <button mat-icon-button matListItemMeta [matMenuTriggerFor]="menu">
+                  <mat-icon style="transform:translate(0, -8px)">more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button (click)="editGroup(group)" mat-menu-item>
+                    <mat-icon>edit</mat-icon>Изменить
+                  </button>
+                  <button (click)="deleteGroup(group)" mat-menu-item>
+                    <mat-icon>remove</mat-icon>Удалить
+                  </button>
+                  <button mat-menu-item matTooltip="Загружайте картинки в формате 1:1"
+                    (click)="onOpenFileDialog(compileId('group',i))">
+                    <mat-icon>add_photo_alternate</mat-icon>Добавить картинку
+                  </button>
+                </mat-menu>
+                <input [ngStyle]="{'display':'none'}" (change)="fileChange($event,'group',group.id)"
+                  [id]="compileId('group',i)" [accept]="acceptImages" type="file" />
+              </mat-list-item>
+            </mat-list>
+
+          </div>
+        </mat-tab>
+        <mat-tab label="Кабинеты">
+          <div class="content">
+            <button (click)="addRoom()" mat-flat-button color="primary">Добавить кабинет</button>
+            <mat-list *ngIf="rooms.length>0">
+              <mat-list-item *ngFor="let room of rooms ; index as i;">
+                <span matListItemTitle>{{room.name}}</span>
+                <img style="margin-left:0" matListItemAvatar [src]="compileUrl(room.img)">
+                <button matTooltip="Загружайте картинки в формате 1:1" (click)="onOpenFileDialog(compileId('room',i))"
+                  mat-icon-button matListItemMeta>
+                  <mat-icon>add_photo_alternate</mat-icon>
+                </button>
+                <input [ngStyle]="{'display':'none'}" (change)="fileChange($event,'room',room.id)"
+                  [id]="compileId('room',i)" [accept]="acceptImages" type="file" />
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="Учителя">
+          <div class="content teacher">
+            <button (click)="addTeacher()" mat-flat-button color="primary">Добавить учителя</button>
+            <mat-form-field class="example-form-field">
+              <mat-label>Поиск по фамилии</mat-label>
+              <input placeholder="Введите фамилию" (keyup)="onKeyupTeacher()" matInput type="text"
+                [(ngModel)]="teacherValue">
+              <button *ngIf="teacherValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearValueTeacher()">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            <mat-list *ngIf="teachers.length>0">
+              <mat-list-item class="big-item" *ngFor="let user of teachers">
+                <span class="cursor"  (click)="goToUser(user)" matListItemTitle>{{getFullname(user)}}</span>
+                <span class="cursor"  (click)="goToUser(user)"  matListItemLine>{{user.teacher.quantum.name}}</span>
+                <img  class="cursor" (click)="goToUser(user)" style="margin-left:0" matListItemAvatar [src]="compileUrl(user.img)">
+                <button mat-icon-button matListItemMeta [matMenuTriggerFor]="menut">
+                  <mat-icon style="transform:translate(0, -8px)">more_vert</mat-icon>
+                </button>
+                <mat-menu #menut="matMenu">
+                  <button (click)="changeQuantum(user)" mat-menu-item>
+                    <mat-icon>edit</mat-icon>Сменить квантум
+                  </button>
+                  <button mat-menu-item (click)="deleteTeacher(user)">
+                    <mat-icon>person_remove</mat-icon>Удалить
+                  </button>
+                </mat-menu>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="Учащиеся">
+          <div class="content teacher">
+            <button (click)="addStudent()" mat-flat-button color="primary">Добавить учащегося</button>
+            <mat-form-field class="example-form-field">
+              <mat-label>Поиск по фамилии</mat-label>
+              <input placeholder="Введите фамилию" (keyup)="onKeyupStudent()" matInput type="text"
+                [(ngModel)]="studentValue">
+              <button *ngIf="studentValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearValueStudent()">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            <mat-list *ngIf="students.length>0">
+              <mat-list-item class="big-item" *ngFor="let user of students">
+                <span class="cursor" (click)="goToUser(user)" matListItemTitle>{{getFullname(user)}}</span>
+                <span class="cursor" (click)="goToUser(user)" matListItemLine>{{user.student.group.name}}</span>
+                <img  class="cursor" (click)="goToUser(user)" style="margin-left:0" matListItemAvatar [src]="compileUrl(user.img)">
+                <button mat-icon-button matListItemMeta [matMenuTriggerFor]="menuu">
+                  <mat-icon style="transform:translate(0, -8px)">more_vert</mat-icon>
+                </button>
+                <mat-menu #menuu="matMenu">
+                  <button (click)="addQuantumLink(user)" mat-menu-item>
+                    <mat-icon>add</mat-icon>Добавить квантум
+                  </button>
+                  <button (click)="changeGroup(user)" mat-menu-item>
+                    <mat-icon>edit</mat-icon>Сменить группу
+                  </button>
+                  <button (click)="deleteStudent(user)" mat-menu-item>
+                    <mat-icon>person_remove</mat-icon>Удалить
+                  </button>
+                </mat-menu>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="Отмена занятий">
+          <div class="content">
+            <button (click)="addReason()" mat-flat-button color="primary">Добавить объявление</button>
+            <mat-list *ngIf="reasons.length>0">
+              <mat-list-item class="big-item" *ngFor="let reason of reasons">
+                <span matListItemTitle>{{reason.name}}</span>
+                <span matListItemLine>{{reason.date_begin|date:"dd.MM.yyyy HH:mm"}} -
+                  {{reason.date_end|date:"dd.MM.yyyy HH:mm"}}
+                </span>
+                <button *ngIf="reason.quantorium_id" (click)="deleteReason(reason)" mat-icon-button matListItemMeta>
+                  <mat-icon style="transform:translate(0, -4px)">remove</mat-icon>
+                </button>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

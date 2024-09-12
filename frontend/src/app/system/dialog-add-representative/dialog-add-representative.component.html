@@ -1,0 +1,16 @@
+<div class="title">
+  <h2 mat-dialog-title>Добавление представителя</h2>
+</div>
+<form mat-dialog-content [formGroup]="form">
+  <mat-form-field *ngFor="let field of fields">
+    <mat-label>{{field.label}}</mat-label>
+    <input [type]="field.type" [placeholder]="field.placeholder" [formControl]="field.formControl" matInput>
+    <mat-icon matSuffix>{{field.icon}}</mat-icon>
+    <mat-error *ngIf="field.formControl.invalid">
+      {{field.messageError()}}
+    </mat-error>
+  </mat-form-field>
+</form>
+<mat-dialog-actions>
+  <button (click)="save()" [disabled]="form.invalid" mat-flat-button color="primary">Добавить</button>
+</mat-dialog-actions>

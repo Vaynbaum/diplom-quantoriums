@@ -1,0 +1,29 @@
+<div class="title">
+  <h2 mat-dialog-title>Новость</h2>
+</div>
+<form [formGroup]="form" mat-dialog-content>
+  <mat-form-field>
+    <mat-label>{{firstnameInput.label}}</mat-label>
+    <input [type]="firstnameInput.type" [placeholder]="firstnameInput.placeholder"
+      [formControl]="firstnameInput.formControl" matInput>
+    <mat-icon matSuffix>{{firstnameInput.icon}}</mat-icon>
+    <mat-error *ngIf="firstnameInput.formControl.invalid">
+      {{firstnameInput.messageError()}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{descriptionInput.label}}</mat-label>
+    <textarea [formControl]="descriptionInput.formControl" [placeholder]="descriptionInput.placeholder"
+      matInput></textarea>
+  </mat-form-field>
+  <img (click)="deleteImg()" matTooltip="Кликните для удаления фотографии" class="preview" *ngIf="img" [src]="img">
+</form>
+<mat-dialog-actions>
+  <input [ngStyle]="{'display':'none'}" (change)="fileChange($event)" id="file-input" [accept]="acceptImages"
+    type="file" />
+  <div class="btns">
+    <button (click)="onOpenFileDialog('file-input')" mat-button color="primary">Прикрепить фотографию</button>
+    <button [disabled]="form.invalid || loadingFile" (click)="save()" mat-flat-button color="primary">Сохранить</button>
+  </div>
+</mat-dialog-actions>

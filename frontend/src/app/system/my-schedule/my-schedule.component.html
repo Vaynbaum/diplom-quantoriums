@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="main-title">
+    <h1>Мое расписание</h1>
+  </div>
+  <div class="left">
+    <mat-card class="inline-calendar-card">
+      <mat-calendar (selectedChange)="onDateChange($event)" [(selected)]="day"></mat-calendar>
+    </mat-card>
+  </div>
+  <div class="right">
+    <div *ngIf="schedules.length==0">В этот день занятий нет</div>
+    <div class="schedule-card card" *ngIf="schedules.length>0">
+      <h3>{{getDateweek()}}, {{getDate()|date:"d MMMM yyyy г."}}</h3>
+      <mat-divider></mat-divider>
+      <div [ngStyle]="styleCancell(schedule)" (click)="markLesson(schedule)" class="schedule-item"
+        *ngFor="let schedule of schedules">
+        <div class="time">
+          <span> {{schedule?.schedule_item?.time_begin_pr|date:"HH:mm"}}</span>
+          <span>{{schedule?.schedule_item?.time_end_pr|date:"HH:mm"}}</span>
+        </div>
+        <mat-divider vertical="true"></mat-divider>
+        <div class="main">
+          <span [matTooltip]="getTooltip(schedule?.schedule_item?.quantum?.name)"
+            class="quantum">{{schedule?.schedule_item?.quantum?.name}}</span>
+          <span class="room">
+            <span>{{schedule?.schedule_item?.group?.name}}</span>,
+            <span [matTooltip]="getTooltip(schedule?.schedule_item?.room?.name)">
+              {{schedule?.schedule_item?.room?.name}}</span>
+          </span>
+        </div>
+        <div [matTooltip]="getFullnameTeacher(schedule?.schedule_item?.teacher)" class="teacher">
+          {{getFullnameTeacher(schedule?.schedule_item?.teacher)}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

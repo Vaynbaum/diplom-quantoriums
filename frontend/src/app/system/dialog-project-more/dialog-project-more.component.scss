@@ -1,0 +1,86 @@
+@import "../../../styles.scss";
+
+.title {
+  padding: 0 $paddingValue $paddingValue;
+}
+.main {
+  padding: 0 $paddingValue $paddingValue $paddingValue !important;
+  display: flex;
+  flex-direction: column;
+  gap: $middleGap;
+
+  .ava {
+    border-radius: $borderRadius;
+    height: 100px;
+    align-self: flex-start;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  .field {
+    display: flex;
+    gap: $smallGap;
+    align-items: center;
+    .field-title {
+      font-weight: 400;
+      width: 80px;
+    }
+
+    img {
+      height: 50px;
+      border-radius: $borderRadius;
+    }
+
+    .field-value {
+      color: black;
+    }
+  }
+  h2 {
+    font-size: 16px;
+  }
+  mat-list {
+    padding: 0;
+  }
+  .cursor {
+    span,
+    img {
+      cursor: pointer;
+    }
+  }
+  .files {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $middleGap;
+
+    .card {
+      border-radius: $borderRadius;
+      padding: $smallPaddingValue;
+      box-shadow: 0px 2.32px 23.6px 0px rgba(43, 87, 199, 0.3607843137);
+
+      display: flex;
+      height: 90px;
+      width: 80px;
+      cursor: pointer;
+      flex-direction: column;
+      align-items: center;
+      .filename {
+        margin-top: auto;
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .delete {
+        align-self: flex-end;
+      }
+      .icon {
+        height: 45px;
+      }
+    }
+  }
+}
