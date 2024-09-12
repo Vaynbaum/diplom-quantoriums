@@ -1,11 +1,12 @@
-![image](https://github.com/user-attachments/assets/678c2af2-e6a6-4471-b3c3-d6b3eb08f9cc)# Quantoriums
+# Quantoriums
 
 Система электронного журнала для кванториумов. Дипломная работа, сделанная по заказу
 
 ## Как это выглядит
 
 страница входа
-<img width="500" src="https://github.com/user-attachments/assets/cd829bc7-9915-4584-8930-236577449fa6">
+
+<img width="200" src="https://github.com/user-attachments/assets/cd829bc7-9915-4584-8930-236577449fa6">
 
 страница с расписанием
 
